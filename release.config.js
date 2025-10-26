@@ -18,7 +18,7 @@
 // }
 module.exports = {
   branches: "main",
-  repositoryUrl: "https://github.com/alialaa/react-app",
+  repositoryUrl: "https://github.com/mesxi1/react-app",
   plugins: [
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
