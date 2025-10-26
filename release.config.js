@@ -1,5 +1,5 @@
 module.exports = {
-  branches: "main",
+  branches: "workflow",
   repositoryUrl: "https://github.com/mesxi1/react-app",
   plugins: [
     "@semantic-release/commit-analyzer",
