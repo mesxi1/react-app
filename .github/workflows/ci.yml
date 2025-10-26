@@ -1,7 +1,7 @@
 name: CI
 on:
-  pull_request:
-    branches: [develop, main]
+  push:
+    branches: [workflow]
 
 jobs:
   build:
@@ -35,12 +35,12 @@ jobs:
           name: build
           path: build
       - name: ZIP Assets
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/workflow'
         run: |
           zip -r build.zip ./build
           zip -r coverage.zip ./coverage
       - name: Create a Release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/workflow'
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
