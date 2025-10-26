@@ -26,4 +26,5 @@ jobs:
           files: |
             # Optional: Specify files to upload as assets
             # For example: dist/*.zip
+            dist/*.zip
           generate_release_notes: true
