@@ -16,14 +16,14 @@
 //     // ]
 //   ]
 // }
-    module.exports = {
-      branches: ['workflow'], // Or your main release branch
-      plugins: [
-        '@semantic-release/commit-analyzer',
-        '@semantic-release/release-notes-generator',
-        '@semantic-release/changelog',
-        '@semantic-release/npm', // If publishing to npm
-        '@semantic-release/git',
-        '@semantic-release/github',
-      ],
-    };
+module.exports = {
+  branches: ["workflow"], // Or your main release branch
+  plugins: [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/npm", // If publishing to npm
+    "@semantic-release/git",
+    "@semantic-release/github"
+  ]
+}
