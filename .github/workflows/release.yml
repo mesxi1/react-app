@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - workflow # Or your main release branch
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5.0.0
+      - name: Use NodeJS
+        uses: actions/setup-node@v6.0.0
+        with:
+          node-version: "24"
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm test -- --coverage
+        env:
+          CI: true
+
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Use a PAT with repo scope
+          NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }} # If publishing to npm
