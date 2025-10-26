@@ -1,10 +1,11 @@
-name: Create Release
-
+name: Release
 on:
   push:
     tags:
-      - 'v*.*.*' # Triggers on tags like v1.0.0, v2.1.5, etc.
-    branches: [main]
+      - "v*" # Push events to a tag matching the 'v*' pattern.
+
+permissions:
+  contents: write # Allows the action to create a release.
 
 jobs:
   release:
@@ -13,27 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            # Release Notes
-            This release corresponds to tag ${{ github.ref }}.
-            Add your release notes here.
-          draft: false
-          prerelease: false
+      - name: Build project # Optional: Add your build steps here
+        run: |
+          # Replace with your project's build commands
+          echo "Building project..."
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./path/to/your/asset.zip # Replace with the actual path to your asset
-          asset_name: your-asset-name.zip # Replace with the desired name for the asset
-          asset_content_type: application/zip # Adjust content type if needed
+          files: |
+            # Optional: Specify files to upload as assets
+            # For example: dist/*.zip
+          generate_release_notes: true
