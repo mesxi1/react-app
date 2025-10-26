@@ -1,6 +1,6 @@
 name: CI
 on:
-  push:
+  pull_request:
     branches: [develop, main]
 
 jobs:
@@ -43,4 +43,4 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
